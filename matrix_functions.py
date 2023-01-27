@@ -10,3 +10,12 @@ def matrix_creator(n, value):
     return(my_matrix)
 stiffness = matrix_creator(2,1)
 print(stiffness)
+
+def gen_kmat(keq_arr, nodes):
+    k_mat = np.zeros((nodes, nodes))
+    for i in range(len(k_mat) - 1):
+        k_mat[i, i] += keq_arr[i]
+        k_mat[i, i + 1] -= keq_arr[i]
+        k_mat[i + 1, i] -= keq_arr[i]
+        k_mat[i + 1, i + 1] += keq_arr[i]
+    return k_mat
